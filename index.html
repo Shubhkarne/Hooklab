@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HookLab — Viral Creator Hook & Retention Engine</title>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+darkMode: 'class',
+theme: {
+extend: {
+colors: {
+brand: {
+50: '#f5f3ff',
+100: '#ede9fe',
+400: '#a78bfa',
+500: '#8b5cf6',
+600: '#7c3aed',
+700: '#6d28d9',
+950: '#1e1035',
+},
+amberAccent: '#f59e0b',
+},
+fontFamily: {
+sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+}
+}
+}
+}
+</script>
+<!-- Google Fonts & FontAwesome -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+​<style>
+body {
+font-family: 'Plus Jakarta Sans', sans-serif;
+background-color: #0b0f19;
+color: #f1f5f9;
+}
+.glow-purple {
+box-shadow: 0 0 50px -10px rgba(139, 92, 246, 0.25);
+}
+.glow-amber {
+box-shadow: 0 0 35px -5px rgba(245, 158, 11, 0.2);
+}
+.gradient-text {
+background: linear-gradient(135deg, #c084fc 0%, #a855f7 40%, #fbbf24 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+::-webkit-scrollbar {
+width: 8px;
+}
+::-webkit-scrollbar-track {
+background: #0f172a;
+}
+::-webkit-scrollbar-thumb {
+background: #334155;
+border-radius: 4px;
+}
+</style>
+</head>
+<body class="antialiased min-h-screen flex flex-col selection:bg-brand-500 selection:text-white">
+​<!-- Toast Notification Container -->
+<div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-3 pointer-events-none"></div>
+​<!-- HEADER / NAVIGATION -->
+<header class="sticky top-0 z-40 backdrop-blur-md bg-slate-950/85 border-b border-slate-800/80">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+<!-- Logo -->
+<a href="#" class="flex items-center gap-2.5">
+<div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-600 via-purple-500 to-amber-400 p-0.5 shadow-md shadow-brand-500/20">
+<div class="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
+<i class="fa-solid fa-bolt text-amber-400 text-base"></i>
+</div>
+</div>
+<span class="font-extrabold text-lg tracking-tight text-white flex items-center gap-1.5">
+Hook<span class="gradient-text">Lab</span>
+</span>
+</a>
+​<!-- Actions -->
+<div class="flex items-center gap-3">
+<button onclick="openGuideModal()" class="hidden sm:flex text-xs font-semibold text-amber-400 hover:text-amber-300 bg-amber-500/10 border border-amber-500/30 px-3 py-1.5 rounded-lg items-center gap-1.5">
+<i class="fa-solid fa-rocket"></i> Deployment Roadmap
+</button>
+<button onclick="toggleFavoritesDrawer()" class="relative p-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 hover:text-white">
+<i class="fa-solid fa-bookmark"></i>
+<span id="saved-count-badge" class="absolute -top-1 -right-1 bg-amber-500 text-slate-950 text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
+</button>
+<a href="#workspace" class="px-3.5 py-2 rounded-xl bg-gradient-to-r from-brand-600 to-amber-500 text-white font-semibold text-xs shadow-md shadow-brand-600/25 flex items-center gap-1.5">
+<span>Try Free</span>
+<i class="fa-solid fa-arrow-right text-[10px]"></i>
+</a>
+</div>
+</div>
+</header>
+​<!-- HERO SECTION -->
+<section class="relative pt-10 pb-16 md:pt-16 md:pb-24 overflow-hidden">
+<div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-brand-600/15 blur-[120px] rounded-full pointer-events-none"></div>
+​<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs text-slate-300 mb-5">
+<span class="flex h-2 w-2 rounded-full bg-amber-400 animate-pulse"></span>
+<span class="font-semibold text-amber-400">Audience Retention Engine</span>
+<span class="text-slate-600">•</span>
+<span class="text-slate-400">Reels & Shorts Opener Lab</span>
+</div>
+​<h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight mb-4">
+Stop losing viewers in the <br class="hidden sm:inline">
+<span class="gradient-text">first 3 seconds</span> of your videos
+</h1>
+​<p class="text-sm sm:text-lg text-slate-400 max-w-2xl mx-auto mb-8">
+Generate spoken opening lines, high-impact on-screen captions, and 3-second camera pacing cues designed to stop thumb scrolling.
+</p>
+​<div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+<a href="#workspace" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-gradient-to-r from-brand-600 via-purple-600 to-amber-500 text-white font-bold text-sm shadow-xl shadow-brand-600/30 flex items-center justify-center gap-2">
+<i class="fa-solid fa-bolt text-amber-300"></i>
+<span>Generate Hook Free</span>
+</a>
+<a href="#before-after" class="w-full sm:w-auto px-5 py-3.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 text-sm font-semibold flex items-center justify-center gap-2">
+<i class="fa-solid fa-play text-brand-400 text-xs"></i>
+<span>See Before vs After</span>
+</a>
+</div>
+</div>
+​<!-- Before / After Card -->
+<div id="before-after" class="mt-12 max-w-4xl mx-auto px-4">
+<div class="rounded-2xl bg-slate-900/90 border border-slate-800 p-4 sm:p-6 shadow-2xl backdrop-blur-sm">
+<div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-800">
+<span class="text-xs font-mono text-slate-400">retention_comparison.demo</span>
+<div class="flex items-center gap-1 bg-slate-950 p-1 rounded-lg border border-slate-800 text-xs">
+<button onclick="setHeroDemo('saas')" id="demo-btn-saas" class="px-2.5 py-1 rounded-md bg-brand-600 text-white font-medium">Micro-SaaS</button>
+<button onclick="setHeroDemo('fitness')" id="demo-btn-fitness" class="px-2.5 py-1 rounded-md text-slate-400">Fitness</button>
+<button onclick="setHeroDemo('finance')" id="demo-btn-finance" class="px-2.5 py-1 rounded-md text-slate-400">Finance</button>
+</div>
+</div>
+​<div class="grid md:grid-cols-2 gap-4">
+<div class="rounded-xl bg-slate-950/70 border border-rose-500/20 p-4">
+<div class="text-[11px] font-bold text-rose-400 uppercase mb-2">❌ Boring Opener (42% Dropoff)</div>
+<p id="demo-before-topic" class="text-xs text-slate-400 font-semibold mb-3">Topic: "How I built a SaaS in 7 days."</p>
+<div class="bg-slate-900/60 p-3 rounded-lg border border-slate-800">
+<p id="demo-before-spoken" class="text-xs text-slate-400 italic">"Hey guys! Today I'm gonna show you how I built my app in one week. Make sure to subscribe!"</p>
+</div>
+</div>
+​<div class="rounded-xl bg-gradient-to-b from-brand-950/40 to-slate-950/80 border border-amber-500/40 p-4 glow-amber">
+<div class="text-[11px] font-bold text-amber-300 uppercase mb-2 flex items-center justify-between">
+<span>🔥 HookLab Retention Hook</span>
+<span id="demo-after-score" class="text-amber-400">98% Retention</span>
+</div>
+<p id="demo-after-topic" class="text-xs text-white font-semibold mb-3">Topic: "How I built a SaaS in 7 days."</p>
+<div class="space-y-2">
+<div class="bg-slate-900/90 p-3 rounded-lg border border-brand-500/30">
+<span class="text-[10px] text-amber-400 font-bold block mb-1">Spoken Opener:</span>
+<p id="demo-after-spoken" class="text-xs text-white font-medium">"I spent 168 hours building a software tool that now pays my rent. Here is the exact tech stack I used to ship it solo."</p>
+</div>
+<div class="bg-slate-900/90 p-3 rounded-lg border border-purple-500/30">
+<span class="text-[10px] text-purple-300 font-bold block mb-1">3-Sec Visual Cue:</span>
+<p id="demo-after-visual" class="text-[11px] text-slate-300">Snap fingers on word "rent" -> jump cut to revenue dashboard hitting ₹45,000.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+​<!-- WORKSPACE SECTION -->
+<section id="workspace" class="py-12 bg-slate-950 border-t border-slate-800">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-6 gap-4">
+<div>
+<h2 class="text-2xl font-extrabold text-white tracking-tight">Creator Studio Workspace</h2>
+<p class="text-slate-400 text-xs mt-1">Select target platform, pick a psychological angle, and generate viral openers.</p>
+</div>
+​<!-- Quota Tracker -->
+<div class="bg-slate-900 border border-slate-800 rounded-xl p-3 flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-brand-500/20 text-brand-400 flex items-center justify-center text-sm">
+<i class="fa-solid fa-bolt"></i>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="text-xs text-slate-400">Daily Quota:</span>
+<span id="quota-count" class="text-xs font-bold text-amber-400">5 / 5 Left</span>
+</div>
+<div class="w-28 h-1 bg-slate-800 rounded-full mt-1 overflow-hidden">
+<div id="quota-bar" class="h-full bg-gradient-to-r from-brand-500 to-amber-400 w-full transition-all"></div>
+</div>
+</div>
+</div>
+</div>
+​<div class="grid lg:grid-cols-12 gap-6">
+<!-- Controls Panel -->
+<div class="lg:col-span-5 bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-5">
+<div>
+<label class="block text-xs font-bold text-slate-300 uppercase mb-2">1. Video Topic or Idea</label>
+<textarea id="topic-input" rows="3" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-brand-500" placeholder="e.g. How I built a profitable micro-SaaS in 7 days..."></textarea>
+​<div class="mt-2.5">
+<span class="text-[11px] text-slate-400 block mb-1">Quick presets:</span>
+<div class="flex flex-wrap gap-1.5">
+<button onclick="applyPreset('saas')" class="px-2 py-0.5 rounded-lg bg-slate-950 border border-slate-800 text-[11px] text-slate-300">🚀 Micro-SaaS</button>
+<button onclick="applyPreset('fitness')" class="px-2 py-0.5 rounded-lg bg-slate-950 border border-slate-800 text-[11px] text-slate-300">💪 Fat Loss</button>
+<button onclick="applyPreset('finance')" class="px-2 py-0.5 rounded-lg bg-slate-950 border border-slate-800 text-[11px] text-slate-300">💸 Index Fund</button>
+<button onclick="applyPreset('productivity')" class="px-2 py-0.5 rounded-lg bg-slate-950 border border-slate-800 text-[11px] text-slate-300">🧠 2-Min Focus</button>
+</div>
+</div>
+</div>
+​<div>
+<label class="block text-xs font-bold text-slate-300 uppercase mb-2">2. Target Platform</label>
+<div class="grid grid-cols-2 gap-2">
+<button onclick="selectPlatform('reels')" id="plat-reels" class="platform-chip p-2 rounded-xl bg-brand-600/20 border border-brand-500 text-white font-medium text-xs flex items-center gap-2">
+<i class="fa-brands fa-instagram text-pink-400"></i>
+<span>Reels</span>
+</button>
+<button onclick="selectPlatform('shorts')" id="plat-shorts" class="platform-chip p-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-400 font-medium text-xs flex items-center gap-2">
+<i class="fa-brands fa-youtube text-red-500"></i>
+<span>YT Shorts</span>
+</button>
+<button onclick="selectPlatform('ytlong')" id="plat-ytlong" class="platform-chip p-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-400 font-medium text-xs flex items-center gap-2">
+<i class="fa-solid fa-play text-red-400"></i>
+<span>YT Longform</span>
+</button>
+<button onclick="selectPlatform('linkedin')" id="plat-linkedin" class="platform-chip p-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-400 font-medium text-xs flex items-center gap-2">
+<i class="fa-brands fa-linkedin text-sky-400"></i>
+<span>LinkedIn / X</span>
+</button>
+</div>
+</div>
+​<div>
+<label class="block text-xs font-bold text-slate-300 uppercase mb-2">3. Hook Angle</label>
+<select id="angle-select" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-brand-500">
+<option value="curiosity">🔍 Curiosity Gap (Must-know mystery)</option>
+<option value="contrarian">🔥 Contrarian Claim (Debunking common myth)</option>
+<option value="story">📖 Relatable Story (Personal transformation)</option>
+<option value="fastval">⚡ Fast Checklist (High value breakdown)</option>
+<option value="pattern">⚠️ Pattern Interrupt (Sudden visual shock)</option>
+</select>
+</div>
+​<button onclick="generateHooks()" id="generate-btn" class="w-full py-3 rounded-xl bg-gradient-to-r from-brand-600 via-purple-600 to-amber-500 text-white font-bold text-xs shadow-lg flex items-center justify-center gap-2">
+<i class="fa-solid fa-wand-magic-sparkles"></i>
+<span id="btn-text">Generate 4 Viral Hooks</span>
+</button>
+</div>
+​<!-- Results Output Panel -->
+<div class="lg:col-span-7 space-y-4">
+<div id="results-empty" class="rounded-2xl bg-slate-900/40 border border-slate-800/80 p-10 text-center flex flex-col items-center justify-center min-h-[380px]">
+<div class="w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center text-brand-400 text-xl mb-3">
+<i class="fa-solid fa-sparkles"></i>
+</div>
+<h4 class="text-base font-bold text-white mb-1">Your Generated Hooks Will Appear Here</h4>
+<p class="text-slate-400 text-xs max-w-xs">Enter your topic on the left or select a preset to generate retention hooks.</p>
+</div>
+​<div id="results-container" class="hidden space-y-4"></div>
+</div>
+</div>
+</div>
+</section>
+​<!-- SAVED VAULT DRAWER -->
+<div id="favorites-drawer" class="fixed inset-0 z-50 pointer-events-none opacity-0 transition-opacity">
+<div onclick="toggleFavoritesDrawer()" class="absolute inset-0 bg-slate-950/80 backdrop-blur-sm"></div>
+<div id="drawer-panel" class="absolute top-0 right-0 bottom-0 w-full max-w-sm bg-slate-900 border-l border-slate-800 p-5 flex flex-col justify-between transform translate-x-full transition-transform pointer-events-auto">
+<div>
+<div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
+<h3 class="text-base font-bold text-white flex items-center gap-2">
+<i class="fa-solid fa-bookmark text-amber-400"></i> Saved Vault
+</h3>
+<button onclick="toggleFavoritesDrawer()" class="p-1.5 rounded-lg bg-slate-950 text-slate-400">
+<i class="fa-solid fa-xmark"></i>
+</button>
+</div>
+<div id="saved-list" class="space-y-3 max-h-[calc(100vh-180px)] overflow-y-auto"></div>
+</div>
+<div class="pt-3 border-t border-slate-800 flex gap-2">
+<button onclick="exportFavoritesTXT()" class="flex-1 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-300 text-xs font-semibold">
+Export TXT
+</button>
+<button onclick="clearAllFavorites()" class="py-2 px-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs font-semibold">
+Clear
+</button>
+</div>
+</div>
+</div>
+​<!-- PRICING SECTION -->
+<section id="pricing" class="py-16 bg-slate-950 border-t border-slate-800">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+<h2 class="text-3xl font-extrabold text-white mb-2">Simple Creator Passes</h2>
+<p class="text-slate-400 text-xs mb-10">Low-cost passes designed for high-frequency video creators.</p>
+​<div class="grid md:grid-cols-3 gap-6 text-left">
+<div class="rounded-2xl bg-slate-900 border border-slate-800 p-6 flex flex-col justify-between">
+<div>
+<span class="text-xs font-bold text-slate-400">Starter</span>
+<div class="text-3xl font-extrabold text-white my-3">₹0</div>
+<ul class="space-y-2 text-xs text-slate-300 mb-6">
+<li>✓ 5 Hooks daily limit</li>
+<li>✓ Instagram Reels & Shorts</li>
+<li>✓ Basic copy & vault save</li>
+</ul>
+</div>
+<a href="#workspace" class="w-full py-2.5 rounded-xl bg-slate-800 text-white font-semibold text-xs text-center">Use Free Version</a>
+</div>
+​<div class="rounded-2xl bg-gradient-to-b from-brand-950 to-slate-900 border-2 border-brand-500 p-6 flex flex-col justify-between relative shadow-xl glow-purple">
+<span class="absolute -top-3 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-full bg-amber-400 text-slate-950 text-[10px] font-extrabold uppercase">Most Popular</span>
+<div>
+<span class="text-xs font-bold text-amber-300">Creator Day Pass</span>
+<div class="text-3xl font-extrabold text-white my-3">₹199 <span class="text-xs text-slate-400 font-normal">/ 24 hrs</span></div>
+<ul class="space-y-2 text-xs text-slate-200 mb-6">
+<li>✓ <strong>Unlimited</strong> hook generations</li>
+<li>✓ All platform formats & angles</li>
+<li>✓ Visual & camera pacing cues</li>
+<li>✓ Full vault export access</li>
+</ul>
+</div>
+<button onclick="openCheckoutModal('Creator 24-Hour Pass', 199)" class="w-full py-3 rounded-xl bg-gradient-to-r from-brand-500 to-amber-400 text-slate-950 font-extrabold text-xs">Buy ₹199 Day Pass</button>
+</div>
+​<div class="rounded-2xl bg-slate-900 border border-slate-800 p-6 flex flex-col justify-between">
+<div>
+<span class="text-xs font-bold text-slate-400">Pro Studio</span>
+<div class="text-3xl font-extrabold text-white my-3">₹499 <span class="text-xs text-slate-400 font-normal">/ month</span></div>
+<ul class="space-y-2 text-xs text-slate-300 mb-6">
+<li>✓ Unlimited Hooks & Storage</li>
+<li>✓ Brand Tone Customization</li>
+<li>✓ Direct Notion/Docs Export</li>
+</ul>
+</div>
+<button onclick="openCheckoutModal('Pro Studio Monthly', 499)" class="w-full py-2.5 rounded-xl bg-slate-800 text-white font-semibold text-xs">Get Pro Studio (₹499)</button>
+</div>
+</div>
+</div>
+</section>
+​<!-- CHECKOUT SIMULATION MODAL -->
+<div id="checkout-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm hidden opacity-0 transition-opacity">
+<div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-sm w-full p-5 relative shadow-2xl">
+<button onclick="closeCheckoutModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+<i class="fa-solid fa-xmark"></i>
+</button>
+<h3 id="checkout-plan-title" class="font-bold text-white text-base mb-1">Creator 24-Hour Pass</h3>
+<p class="text-xs text-slate-400 mb-4">Simulated checkout for testing payment workflow.</p>
+<div class="bg-slate-950 p-3 rounded-xl border border-slate-800 flex justify-between items-center mb-4">
+<span class="text-xs text-slate-400">Total:</span>
+<span id="checkout-plan-price" class="text-lg font-extrabold text-amber-400">₹199</span>
+</div>
+<button onclick="simulatePaymentSuccess()" class="w-full py-3 rounded-xl bg-gradient-to-r from-brand-500 to-amber-400 text-slate-950 font-bold text-xs">
+Pay Now & Unlock Unlimited
+</button>
+</div>
+</div>
+​<!-- ROADMAP MODAL -->
+<div id="guide-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-md hidden opacity-0 transition-opacity">
+<div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-lg w-full p-6 relative shadow-2xl text-xs space-y-4">
+<button onclick="closeGuideModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+<i class="fa-solid fa-xmark"></i>
+</button>
+<h3 class="font-extrabold text-white text-lg">Next Steps for HookLab</h3>
+<p class="text-slate-400">How to transition this single index.html file into a real earnings business:</p>
+​<div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-1">
+<span class="font-bold text-amber-400">1. Publish on GitHub Pages</span>
+<p class="text-slate-400">Create a repo named hooklab on GitHub, upload this file as index.html, and turn on Pages in settings for a free live link.</p>
+</div>
+<div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-1">
+<span class="font-bold text-brand-400">2. Add Node.js + Express Backend</span>
+<p class="text-slate-400">Host an Express server on Render to securely call Gemini/OpenAI APIs without exposing secret keys in frontend code.</p>
+</div>
+<div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-1">
+<span class="font-bold text-emerald-400">3. Enable Razorpay Checkout</span>
+<p class="text-slate-400">Create a Razorpay account to accept UPI/Card payments for ₹199 Day Passes, verifying transaction signatures server-side.</p>
+</div>
+</div>
+</div>
+​<!-- FOOTER -->
+<footer class="bg-slate-950 border-t border-slate-800 py-6 text-center text-xs text-slate-500">
+© 2026 HookLab Studio. Built for video creators.
+</footer>
+​<!-- JAVASCRIPT LOGIC -->
+<script>
+let currentPlatform = 'reels';
+let remainingQuota = 5;
+let savedHooks = [];
+​try {
+const localSaved = localStorage.getItem('hooklab_saved');
+if (localSaved) savedHooks = JSON.parse(localSaved);
+} catch (e) {}
+​const demoNiches = {
+saas: {
+topic: 'Topic: "How I built a SaaS in 7 days."',
+beforeSpoken: '"Hey guys! Today I'm gonna show you how I built my app in one week. Make sure to subscribe!"',
+afterSpoken: '"I spent 168 hours building a software tool that now pays my rent. Here is the exact tech stack I used to ship it solo."',
+afterVisual: 'Snap fingers on word "rent" -> jump cut to revenue dashboard hitting ₹45,000.',
+score: '98% Retention'
+},
+fitness: {
+topic: 'Topic: "3 stomach fat myths keeping your waist bloated."',
+beforeSpoken: '"Hi everyone, welcome back. Today we talk about three belly fat exercise myths."',
+afterSpoken: '"If you are still doing 100 crunches a night to lose belly fat, you are literally wasting 90% of your gym time."',
+afterVisual: 'Slap hand on gym floor -> cut to side-by-side calorie deficit breakdown graphic.',
+score: '96% Retention'
+},
+finance: {
+topic: 'Topic: "Where to invest your first ₹10,000."',
+beforeSpoken: '"Hello guys, investing is important. In this video I discuss mutual funds vs stocks."',
+afterSpoken: '"If I lost all my savings today and only had ₹10,000 left, this is the exact 2-step index fund split I would make."',
+afterVisual: 'Throw ₹500 note towards lens -> screen transition into green portfolio chart.',
+score: '99% Retention'
+}
+};
+​function setHeroDemo(key) {
+const data = demoNiches[key];
+if (!data) return;
+document.getElementById('demo-before-topic').innerText = data.topic;
+document.getElementById('demo-after-topic').innerText = data.topic;
+document.getElementById('demo-before-spoken').innerText = data.beforeSpoken;
+document.getElementById('demo-after-spoken').innerText = data.afterSpoken;
+document.getElementById('demo-after-visual').innerText = data.afterVisual;
+document.getElementById('demo-after-score').innerText = data.score;
+​['saas', 'fitness', 'finance'].forEach(k => {
+const btn = document.getElementById(demo-btn-${k});
+btn.className = k === key ? "px-2.5 py-1 rounded-md bg-brand-600 text-white font-medium" : "px-2.5 py-1 rounded-md text-slate-400";
+});
+}
+​function selectPlatform(plat) {
+currentPlatform = plat;
+['reels', 'shorts', 'ytlong', 'linkedin'].forEach(p => {
+const el = document.getElementById(plat-${p});
+el.className = p === plat
+? "platform-chip p-2 rounded-xl bg-brand-600/20 border border-brand-500 text-white font-medium text-xs flex items-center gap-2"
+: "platform-chip p-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-400 font-medium text-xs flex items-center gap-2";
+});
+}
+​const presets = {
+saas: "How I built a micro-SaaS in 7 days without code",
+fitness: "3 stomach fat myths keeping your waistline bloated",
+finance: "How to invest your first ₹10,000 for passive income in 2026",
+productivity: "The 2-minute dopamine reset rule for deep focus"
+};
+​function applyPreset(key) {
+if (presets[key]) {
+document.getElementById('topic-input').value = presets[key];
+generateHooks();
+}
+}
+​function generateHooks() {
+const topic = document.getElementById('topic-input').value.trim();
+if (!topic) {
+showToast("Please enter a video topic first!", "warning");
+return;
+}
+​if (remainingQuota <= 0) {
+showToast("Daily quota reached! Upgrade for unlimited hook generation.", "warning");
+openCheckoutModal('Creator 24-Hour Pass', 199);
+return;
+}
+​document.getElementById('results-empty').classList.add('hidden');
+document.getElementById('results-container').classList.remove('hidden');
+​if (remainingQuota < 99) {
+remainingQuota--;
+updateQuotaUI();
+}
+​const hooks = buildHookData(topic, currentPlatform, document.getElementById('angle-select').value);
+renderHooks(hooks);
+showToast("⚡ 4 Viral hooks generated!", "success");
+}
+​function buildHookData(topic, platform, angle) {
+const shortTopic = topic.length > 40 ? topic.substring(0, 40) + '...' : topic;
+return [
+{
+id: 'h-' + Date.now() + '-1',
+badge: '🔥 98% Retention',
+type: 'Curiosity Gap',
+spoken: Nobody talks about this, but if you're trying to ${shortTopic.toLowerCase()}, you've probably been doing it completely backwards.,
+textOverlay: STOP DOING THIS 🛑,
+pacingCue: 'Point finger at lens -> cut to screenshot proof.'
+},
+{
+id: 'h-' + Date.now() + '-2',
+badge: '⚡ Virality Boost',
+type: 'Contrarian Claim',
+spoken: Stop listening to popular advice on ${shortTopic.toLowerCase()}. Here is what actually worked for me in under 30 days.,
+textOverlay: The Raw Truth 💡,
+pacingCue: 'Snap fingers -> whip pan to quick live demonstration.'
+},
+{
+id: 'h-' + Date.now() + '-3',
+badge: '📈 3.2x Watch Time',
+type: 'Relatable Story',
+spoken: 6 months ago I was stuck with ${shortTopic.toLowerCase()}. Then I made one 5-minute pivot that changed everything.,
+textOverlay: Fixed in 5 Mins ⏰,
+pacingCue: 'Black/white filter -> snap back to full color on pivot.'
+},
+{
+id: 'h-' + Date.now() + '-4',
+badge: '🎯 Direct Payoff',
+type: 'Fast Checklist',
+spoken: Save this video right now if you want a step-by-step breakdown on ${shortTopic.toLowerCase()} in 30 seconds.,
+textOverlay: Save Before It's Gone 📌,
+pacingCue: 'Hold phone to screen -> tap notes app sync.'
+}
+];
+}
+​function renderHooks(hooks) {
+const container = document.getElementById('results-container');
+container.innerHTML = '';
+​hooks.forEach((hook) => {
+const card = document.createElement('div');
+card.className = "p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-3";
+card.innerHTML =  <div class="flex justify-between items-center text-xs"> <span class="px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/30 text-amber-400 font-bold">${hook.badge}</span> <div class="flex items-center gap-2"> <span class="text-slate-500">${hook.type}</span> <button onclick="saveHook('${hook.id}', \{escapeQuotes(hook.spoken)}\`, \`{escapeQuotes(hook.textOverlay)}`)" class="text-slate-400 hover:text-amber-400">
+<i class="fa-solid fa-star"></i>
+</button>
+</div>
+</div>
+<div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
+<div class="flex justify-between text-[10px] text-brand-400 font-bold mb-1">
+<span>SPOKEN OPENER</span>
+<button onclick="copyText(\`${escapeQuotes(hook.spoken)}\`)" class="text-slate-400 hover:text-white">Copy</button>
+</div>
+<p class="text-xs text-white font-medium">{hook.spoken}</p>
+</div>
+<div class="grid grid-cols-2 gap-2 text-[11px]">
+<div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800">
+<span class="text-amber-400 font-bold block mb-0.5">On-Screen Caption:</span>
+<span class="text-slate-300">{hook.textOverlay}</span>
+</div>
+<div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800">
+<span class="text-purple-300 font-bold block mb-0.5">3-Sec Visual Cue:</span>
+<span class="text-slate-400">${hook.pacingCue}</span>
+</div>
+</div>
+`;
+container.appendChild(card);
+});
+}
+​function escapeQuotes(str) {
+return str.replace(/'/g, "\'").replace(/"/g, '\"');
+}
+​function updateQuotaUI() {
+const countEl = document.getElementById('quota-count');
+const bar = document.getElementById('quota-bar');
+if (remainingQuota >= 99) {
+countEl.innerText = "UNLIMITED";
+countEl.className = "text-xs font-bold text-emerald-400";
+bar.style.width = "100%";
+} else {
+countEl.innerText = ${remainingQuota} / 5 Left;
+bar.style.width = ${(remainingQuota / 5) * 100}%;
+}
+}
+​function saveHook(id, spoken, textOverlay) {
+if (savedHooks.some(h => h.spoken === spoken)) {
+showToast("Already saved in vault!", "info");
+return;
+}
+savedHooks.push({ id, spoken, textOverlay });
+try { localStorage.setItem('hooklab_saved', JSON.stringify(savedHooks)); } catch(e){}
+updateSavedUI();
+showToast("Saved to vault!", "success");
+}
+​function updateSavedUI() {
+document.getElementById('saved-count-badge').innerText = savedHooks.length;
+const container = document.getElementById('saved-list');
+if (savedHooks.length === 0) {
+container.innerHTML = '<p class="text-xs text-slate-500 text-center py-6">Vault is empty.</p>';
+return;
+}
+container.innerHTML = '';
+savedHooks.forEach(item => {
+const div = document.createElement('div');
+div.className = "bg-slate-950 p-3 rounded-lg border border-slate-800 text-xs space-y-1";
+div.innerHTML =  <p class="text-slate-200 font-medium">${item.spoken}</p> <div class="flex justify-between items-center text-[10px] text-slate-400 pt-1 border-t border-slate-900"> <span>Caption: ${item.textOverlay}</span> <button onclick="copyText(\${escapeQuotes(item.spoken)}`)" class="text-amber-400 font-bold">Copy</button>
+</div>
+`;
+container.appendChild(div);
+});
+}
+​function clearAllFavorites() {
+savedHooks = [];
+try { localStorage.removeItem('hooklab_saved'); } catch(e){}
+updateSavedUI();
+showToast("Vault cleared.", "info");
+}
+​function exportFavoritesTXT() {
+if (savedHooks.length === 0) return showToast("Vault is empty!", "warning");
+let text = "--- HookLab Export ---\n\n";
+savedHooks.forEach((h, i) => { text += [${i+1}] Spoken: ${h.spoken}\nCaption: ${h.textOverlay}\n\n; });
+const a = document.createElement('a');
+a.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(text);
+a.download = 'HookLab_Vault.txt';
+a.click();
+}
+​let drawerOpen = false;
+function toggleFavoritesDrawer() {
+drawerOpen = !drawerOpen;
+const drawer = document.getElementById('favorites-drawer');
+const panel = document.getElementById('drawer-panel');
+if (drawerOpen) {
+drawer.classList.remove('pointer-events-none', 'opacity-0');
+panel.classList.remove('translate-x-full');
+updateSavedUI();
+} else {
+drawer.classList.add('opacity-0');
+panel.classList.add('translate-x-full');
+setTimeout(() => drawer.classList.add('pointer-events-none'), 300);
+}
+}
+​function copyText(text) {
+if (navigator.clipboard && navigator.clipboard.writeText) {
+navigator.clipboard.writeText(text).then(() => showToast("Copied to clipboard!", "success"));
+} else {
+const ta = document.createElement('textarea');
+ta.value = text;
+document.body.appendChild(ta);
+ta.select();
+document.execCommand('copy');
+document.body.removeChild(ta);
+showToast("Copied to clipboard!", "success");
+}
+}
+​function showToast(msg, type = 'info') {
+const container = document.getElementById('toast-container');
+const toast = document.createElement('div');
+toast.className = p-3 rounded-xl border bg-slate-900 text-white text-xs font-semibold shadow-xl flex items-center gap-2 ${type === 'success' ? 'border-emerald-500/40' : 'border-slate-800'};
+toast.innerHTML = <i class="fa-solid fa-circle-info ${type==='success'?'text-emerald-400':'text-amber-400'}"></i> ${msg};
+container.appendChild(toast);
+setTimeout(() => toast.remove(), 2500);
+}
+​function openCheckoutModal(title, price) {
+document.getElementById('checkout-plan-title').innerText = title;
+document.getElementById('checkout-plan-price').innerText = ₹${price};
+const m = document.getElementById('checkout-modal');
+m.classList.remove('hidden');
+setTimeout(() => m.classList.remove('opacity-0'), 10);
+}
+​function closeCheckoutModal() {
+const m = document.getElementById('checkout-modal');
+m.classList.add('opacity-0');
+setTimeout(() => m.classList.add('hidden'), 300);
+}
+​function simulatePaymentSuccess() {
+closeCheckoutModal();
+remainingQuota = 999;
+updateQuotaUI();
+showToast("🎉 Payment Successful! Unlimited Access Unlocked.", "success");
+}
+​function openGuideModal() {
+const m = document.getElementById('guide-modal');
+m.classList.remove('hidden');
+setTimeout(() => m.classList.remove('opacity-0'), 10);
+}
+​function closeGuideModal() {
+const m = document.getElementById('guide-modal');
+m.classList.add('opacity-0');
+setTimeout(() => m.classList.add('hidden'), 300);
+}
+​window.onload = function() {
+updateQuotaUI();
+updateSavedUI();
+};
+</script>
+</body>
+</html>
